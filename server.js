@@ -11,7 +11,7 @@ const app = express();
 const http = require('http');
 
 const ports = {
-  http: 80
+  http: process.env.PORT || 80
 }
 
 const httpServer = http.createServer(app);
