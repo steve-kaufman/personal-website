@@ -11,7 +11,7 @@ const app = express();
 const http = require('http');
 
 const ports = {
-  http: 3002
+  http: 80
 }
 
 const httpServer = http.createServer(app);
