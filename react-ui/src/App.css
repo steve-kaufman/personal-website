@@ -1,0 +1,80 @@
+#root {
+  height: 100vh;
+  width: 100vw;
+
+  margin: 0px;
+  padding: 0px;
+
+  overflow-x: hidden;
+
+  background-color: #eee;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.TopBar {
+  width: 100%;
+  margin: 10px 0px 10px 0px;
+}
+
+.TopBar .Name {
+  margin-left: 50px;
+  font-size: 22pt;
+
+  color: #000;
+
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.TopBar .NavBar {
+  float: right;
+  margin-right: 150px;
+  margin-top: 8px;
+}
+
+.TopBar .NavBar .Nav {
+  float: left;
+  margin-right: 25px;
+
+  color: #444;
+
+  text-decoration: none;
+}
+
+.Page {
+  width: 100%;
+}
+
+.Footer {
+  width: 100%;
+  background-color: #333;
+  color: #ccc;
+}
+
+.Footer > div {
+  display: flex;
+  margin: 20px 200px 20px 200px;
+}
+
+.Footer > div > * {
+  margin: auto;
+}
+
+.Footer > div > a {
+  color: #aaa;
+  text-decoration: none;
+}
+
+.Vertical {
+  width: 0;
+  border-left: 1px solid #222;
+  height: 30px;
+  display: inline-block;
+}
+
+.Copyright {
+  display: inline-block;
+  vertical-align: baseline;
+}

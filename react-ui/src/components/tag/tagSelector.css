@@ -1,0 +1,14 @@
+
+.TagSelector .Elements {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.TagSelector .Tags {
+  float: right;
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: 50px;
+}

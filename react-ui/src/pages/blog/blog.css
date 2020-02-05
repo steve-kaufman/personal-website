@@ -1,0 +1,27 @@
+
+.Sidebar {
+  width: 19%;
+  height: 90vh;
+  float: left;
+  background-color: #ddd;
+  border: solid 1px #000;
+  border-width: 1px 1px 0px 0px
+}
+
+.Sidebar a {
+  color: #666;
+  text-decoration: none;
+}
+
+.BlogNav {
+  display: block;
+  margin: 10px 20px 0px 20px;
+  text-align: center;
+}
+
+.Body {
+  width: 80%;
+  float: left;
+  border: solid 1px #000;
+  border-width: 1px 0px 0px 0px
+}
