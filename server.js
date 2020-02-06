@@ -7,25 +7,51 @@ const fs = require('fs');
 const express = require('express');
 const app = express();
 
+// All the middleware
 const mini = require('mini-image-server');
-
-// Image hosting
-app.use(mini(path.join(__dirname, 'static', 'images')));
-
-// File Routing
-app.use(express.static(path.join(__dirname, 'react-ui', 'build')));
-
-// REST managing
 const bodyParser = require("body-parser");
+const session = require('express-session');
+
+// mini-image-server
+app.use(mini(path.join(__dirname, 'static', 'img', 'min')));
+// body-parser
 app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(bodyParser.json({limit: '500mb'}));
+// express-session
+app.use(session({
+  secret: fs.readFileSync(path.join(__dirname, 'auth.json')),
+  cookie: {
+    maxAge: 60000
+  }
+}));
 
-// Send the page
+// Static routes for files
+app.use(express.static(path.join(__dirname, 'static')));
+app.use(express.static(path.join(__dirname, 'react-ui', 'build')));
+
+// Start the server
+const http = require('http');
+const ports = {
+  http: process.env.PORT || 3002
+}
+const httpServer = http.createServer(app);
+httpServer.listen(ports.http, () => {
+  console.log(`http server started on port ${ports.http}`);
+});
+
+// Send the default page
 app.get('/', (req, res) => {
-  console.log('test');
   res.sendFile(path.join(__dirname, 'react-ui', 'build', 'index.html'));
+});
+
+app.get('auth/login', (req, res) => {
+  res.json('false');
+});
+
+app.get('auth/create', (req, res) => {
+  res.json('false');
 });
 
 app.get('/projects', (req, res) => {
@@ -130,19 +156,7 @@ app.post('/contact', (req, res) => {
   })
 });
 
+// redirect any request that don't go anywhere to the home page
 app.get('*', (req, res) => {
   res.redirect('/');
-});
-
-// Networking
-const http = require('http');
-
-const ports = {
-  http: process.env.PORT || 3002
-}
-
-const httpServer = http.createServer(app);
-
-httpServer.listen(ports.http, () => {
-  console.log(`http server started on port ${ports.http}`);
 });

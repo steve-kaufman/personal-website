@@ -22,4 +22,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-/static/images/min
+auth.json
+/static/img/min/min
