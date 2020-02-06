@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 
 import './home.css';
-import photo from './photo.png';
 
 import TagSelector from './../../components/tag/tagSelector'
 
 import Project from './../../components/project/project';
 import BlogPost from './../../components/blog/blogPost';
+
+import Image from 'mini-image-react';
 
 class Home extends Component {
   constructor(props){
@@ -53,9 +54,14 @@ class Home extends Component {
   render(){
     return <div>
       <div className='Intro'>
-        <div className='Center'>
-          <img className='Photo' src={photo} alt=''/>
-          <div className='PhotoText'>Welcome</div>
+        <div className='Container'>
+          <Image className='Background' src='intro.png' alt=''/>
+          <div className='Container2'>
+            <div className='Center'>
+              <Image className='Photo' src='photo.png' alt=''/>
+              <div className='PhotoText'>Welcome</div>
+            </div>
+          </div>
         </div>
       </div>
       <div className='Portfolio'>

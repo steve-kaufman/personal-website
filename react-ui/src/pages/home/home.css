@@ -3,17 +3,37 @@
   display: block;
   background-size: cover;
   background-color: #fff;
-  background-image: url('./intro.png');
   background-blend-mode: luminosity;
   height: 650px;
   display: flex;
+
+  overflow: hidden;
+}
+
+.Container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.Background {
+  position: absolute;
+  width: 100%;
+}
+
+.Container2 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }
 
 .Center {
   margin: auto;
+  margin-top: 10%;
 }
 
 .Photo {
+  margin-left: calc(50% - 100px);
   width: 200px;
   border-radius: 50%;
   background-color: black;

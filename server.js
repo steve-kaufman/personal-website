@@ -7,21 +7,12 @@ const fs = require('fs');
 const express = require('express');
 const app = express();
 
-// Networking
-const http = require('http');
+const mini = require('mini-image-server');
 
-const ports = {
-  http: process.env.PORT || 80
-}
-
-const httpServer = http.createServer(app);
-
-httpServer.listen(ports.http, () => {
-  console.log(`http server started on port ${ports.http}`);
-});
+// Image hosting
+app.use(mini(path.join(__dirname, 'static', 'images')));
 
 // File Routing
-app.use(express.static(path.join(__dirname, 'static')));
 app.use(express.static(path.join(__dirname, 'react-ui', 'build')));
 
 // REST managing
@@ -141,4 +132,17 @@ app.post('/contact', (req, res) => {
 
 app.get('*', (req, res) => {
   res.redirect('/');
+});
+
+// Networking
+const http = require('http');
+
+const ports = {
+  http: process.env.PORT || 3002
+}
+
+const httpServer = http.createServer(app);
+
+httpServer.listen(ports.http, () => {
+  console.log(`http server started on port ${ports.http}`);
 });
