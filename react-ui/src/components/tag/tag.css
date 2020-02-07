@@ -1,8 +1,4 @@
 
-.Selected {
-  background-color: #eee;
-}
-
 .Tag {
   display: inline-block;
   padding: 5px;
@@ -12,6 +8,10 @@
   border-radius: 4px;
   color: #666;
   cursor: pointer;
+}
+
+.Selected {
+  background-color: #ccc;
 }
 
 .Tag:hover {
