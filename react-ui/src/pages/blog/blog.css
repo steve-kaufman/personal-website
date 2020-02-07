@@ -23,6 +23,10 @@
   width: 100%;
 }
 
+.Link:hover {
+  background-color: #ccc;
+}
+
 .Sidebar a {
   color: #666;
   text-decoration: none;
