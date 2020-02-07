@@ -68,7 +68,6 @@ class Home extends Component {
   render(){
     return <div>
       <div style={{
-        display: 'block',
         height: '650px',
         display: 'flex',
         overflow: 'hidden',
