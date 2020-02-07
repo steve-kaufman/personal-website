@@ -14,16 +14,15 @@ if(app.get('env') === 'production'){
 
 // All the middleware
 const mini = require('mini-image-server');
-const bodyParser = require('body-parser');
 const session = require('express-session');
 
 // mini-image-server
 app.use(mini(path.join(__dirname, 'static', 'img', 'min')));
 // body-parser
-app.use(bodyParser.urlencoded({
+app.use(express.urlencoded({
   extended: true
 }));
-app.use(bodyParser.json({limit: '500mb'}));
+app.use(express.json({limit: '500mb'}));
 // express-session
 app.use(session({
   secret: fs.readFileSync(path.join(__dirname, 'auth.json'), 'utf-8'),
