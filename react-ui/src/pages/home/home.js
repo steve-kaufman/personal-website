@@ -67,21 +67,42 @@ class Home extends Component {
 
   render(){
     return <div>
-      <div className='Intro'>
-        <div className='Container'>
-          <Image className='Background' src='intro.png' alt=''/>
-          <div className='Container2'>
-            <div className='Center'>
-              <Image className='Photo' src='photo.png' alt=''/>
-              <div className='PhotoText'>Welcome</div>
-            </div>
+      <div style={{
+        display: 'block',
+        height: '650px',
+        display: 'flex',
+        overflow: 'hidden',
+      }}>
+        <div style={{
+          position: 'relative',
+          width: '100%',
+        }}>
+          <Image style={{
+            position: 'absolute',
+            width: '100%',
+          }} src='intro.png' alt=''/>
+          <div style={{
+            position: 'absolute',
+            width: '100%',
+            top: '25%',
+          }}>
+            <Image style={{
+              marginLeft: 'calc(42.5% - 15px)',
+              width: '15%',
+              borderRadius: '50%',
+              border: '1em solid #555',
+            }} src='photo.png' alt=''/>
+            <div style={{
+              color: '#fff',
+              textAlign: 'center',
+              fontSize: '30pt',
+              textShadow: '-0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black',
+            }}>Welcome</div>
           </div>
         </div>
       </div>
-      <div className='Portfolio'>
-        <div className='Header'>
-          Portfolio
-        </div>
+      <div className='Section'>
+        <div className='Header'> Portfolio </div>
         <TagSelector>
           {
             (this.state.projects === undefined)? <div>fetching projects</div>:
@@ -90,13 +111,9 @@ class Home extends Component {
             })
           }
         </TagSelector>
-        <div className='Projects'>
-        </div>
       </div>
-      <div className='Skills'>
-        <div className='Header'>
-          Skills
-        </div>
+      <div className='Section'>
+        <div className='Header'> Skills </div>
         <div className='SkillList'>
           {
             (!this.state.skills)? <div>fetching skills</div>:
@@ -106,10 +123,8 @@ class Home extends Component {
           }
         </div>
       </div>
-      <div className='Blog'>
-        <div className='Header'>
-          Blog
-        </div>
+      <div className='Section'>
+        <div className='Header'> Blog </div>
         <TagSelector>
           {
             (this.state.blog === undefined)? <div>fetching blog posts</div>:
@@ -118,7 +133,17 @@ class Home extends Component {
             })
           }
         </TagSelector>
-        <button className='MoreButton' onClick={() => {
+        <button style={{
+          float: 'right',
+          margin: '0px 10px 10px 0px',
+          background: 'transparent',
+          padding: '7.5px',
+          color: '#666',
+          border: '2px solid #666',
+          borderRadius: '2px',
+          fontWeight: 'bold',
+          cursor: 'pointer',
+        }} onClick={() => {
 
           fetch(`/blog/new?count=5&start=${this.state.blogEnd}`)
           .then((res) => {
