@@ -14,7 +14,7 @@ if(app.get('env') === 'production'){
 
 // All the middleware
 const mini = require('mini-image-server');
-const session = require('express-session');
+// const session = require('express-session');
 
 // mini-image-server
 app.use(mini(path.join(__dirname, 'static', 'img', 'min')));
@@ -24,15 +24,15 @@ app.use(express.urlencoded({
 }));
 app.use(express.json({limit: '500mb'}));
 // express-session
-app.use(session({
-  secret: fs.readFileSync(path.join(__dirname, 'auth.json'), 'utf-8'),
-  resave: false,
-  saveUninitialized: true,
-  cookie: {
-    maxAge: 60000,
-    secure: 'auto',
-  },
-}));
+//app.use(session({
+//  secret: fs.readFileSync(path.join(__dirname, 'auth.json'), 'utf-8'),
+//  resave: false,
+//  saveUninitialized: true,
+//  cookie: {
+//    maxAge: 60000,
+//    secure: 'auto',
+//  },
+//}));
 
 // Static routes for files
 app.use(express.static(path.join(__dirname, 'static')));
