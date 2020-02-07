@@ -49,7 +49,17 @@ class NewPosts extends Component {
         })
       }
     </TagSelector>
-    <button className='MoreButton' onClick={() => {
+    <button style={{
+      float: 'right',
+      margin: '0px 10px 10px 0px',
+      background: 'transparent',
+      padding: '7.5px',
+      color: '#666',
+      border: '2px solid #666',
+      borderRadius: '2px',
+      fontWeight: 'bold',
+      cursor: 'pointer',
+    }} onClick={() => {
 
       fetch(`/blog/new?count=5&start=${this.state.blogEnd}`)
       .then((res) => {

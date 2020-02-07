@@ -28,7 +28,9 @@ class Post extends Component {
   }
 
   render(){
-    return <div>
+    return <div style={{
+      width: '95%',
+    }}>
       {
         (this.state.loading)? 'Page Loading Please Wait' :
         <BlogPost { ...this.state }/>

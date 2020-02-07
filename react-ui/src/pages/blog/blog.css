@@ -8,15 +8,25 @@
   border-width: 1px 1px 0px 0px
 }
 
+.Sidebar .Links {
+  margin: 25px 0px 0px 0px;
+}
+
+.Link {
+  display: block;
+  padding: 19px 0px 0px 0px;
+  height: 40px;
+}
+
+.Link:nth-child(odd) {
+  background-color: #fff;
+  width: 100%;
+}
+
 .Sidebar a {
   color: #666;
   text-decoration: none;
-}
-
-.BlogNav {
-  display: block;
-  margin: 10px 20px 0px 20px;
-  text-align: center;
+  margin: 0px 0px 0px 35px;
 }
 
 .Body {

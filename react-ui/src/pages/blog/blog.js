@@ -36,22 +36,26 @@ class Blog extends Component {
           postList: posts.map((post) => {
             return { id: post.id, description: post.description };
           })
-        })
-      })
+        });
+      });
     });
   }
 
   render(){
     return <div>
-      <div className='Header'>Blog Post's</div>
-      <div>
       <Router>
+        <div>
           <div className='Sidebar'>
-            {
-              this.state.postList.map((post, i) => {
-                return <Link key={i} className='BlogNav' to={`/blog/${post.id}`}>{post.description}</Link>
-              })
-            }
+            <Link className='Header' to={`/blog/`}> Blog </Link>
+            <div className='Links'>
+              {
+                this.state.postList.map((post, i) => {
+                  return <div className='Link'>
+                    <Link key={i} to={`/blog/${post.id}`}>{post.description}</Link>
+                  </div>
+                })
+              }
+            </div>
           </div>
           <div className='Body'>
             <Switch>
@@ -59,8 +63,8 @@ class Blog extends Component {
               <Route path='/blog/*' component={Post}/>
             </Switch>
           </div>
-        </Router>
-      </div>
+        </div>
+      </Router>
     </div>;
   }
 }
