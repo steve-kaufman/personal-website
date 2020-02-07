@@ -7,9 +7,14 @@ const fs = require('fs');
 const express = require('express');
 const app = express();
 
+// Trust https proxys in production
+if(app.get('env') === 'production'){
+  app.set('trust proxy', 1)
+}
+
 // All the middleware
 const mini = require('mini-image-server');
-const bodyParser = require("body-parser");
+const bodyParser = require('body-parser');
 const session = require('express-session');
 
 // mini-image-server
@@ -21,10 +26,13 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json({limit: '500mb'}));
 // express-session
 app.use(session({
-  secret: fs.readFileSync(path.join(__dirname, 'auth.json')),
+  secret: fs.readFileSync(path.join(__dirname, 'auth.json'), 'utf-8'),
+  resave: false,
+  saveUninitialized: true,
   cookie: {
-    maxAge: 60000
-  }
+    maxAge: 60000,
+    secure: 'auto',
+  },
 }));
 
 // Static routes for files
@@ -46,108 +54,64 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'react-ui', 'build', 'index.html'));
 });
 
-app.get('auth/login', (req, res) => {
+// API routes for authentication
+app.get('/auth/login', (req, res) => {
+  res.json('false');
+});
+app.get('/auth/create', (req, res) => {
   res.json('false');
 });
 
-app.get('auth/create', (req, res) => {
-  res.json('false');
+// API routes for the home page
+app.get('/home/projects', (req, res) => {
+  fs.readFile(path.join(__dirname, 'static', 'home', 'projects.json'), 'utf-8', (err, json) => {
+    if(err){ return res.sendStatus(500) };
+    res.send(json)
+  });
 });
-
-app.get('/projects', (req, res) => {
-  fs.readFile(path.join(__dirname, 'data', 'projects.json'), 'utf-8', (err, json) => {
-    if(err){
-      return console.log(err);
-    }
-    res.send(json);
+app.get('/home/skills', (req, res) => {
+  fs.readFile(path.join(__dirname, 'static', 'home', 'skills.json'), 'utf-8', (err, json) => {
+    if(err){ return res.sendStatus(500) };
+    res.send(json)
   });
 });
 
-app.get('/skills', (req, res) => {
-  fs.readFile(path.join(__dirname, 'data', 'skills.json'), 'utf-8', (err, json) => {
-    if(err){
-      return console.log(err);
-    }
-    res.send(json);
-  });
-});
-
+// API routes for blog things
 app.get('/blog/post', (req, res) => {
-  fs.readFile(path.join(__dirname, 'data', 'blog', 'posts', `${req.query.post}.json`), 'utf-8', (err, json) => {
-    if(err){
-      return console.log(err);
-    }
-
-    res.send(json);
+  fs.readFile(path.join(__dirname, 'static', 'blog', 'posts', `${req.query.post}.json`), 'utf-8', (err, json) => {
+    if(err){ return res.sendStatus(500) };
+    res.send(json)
   });
 });
+app.get('/blog/list', (req, res) => {
+  // Get a list of all of the posts
+  fs.readFile(path.join(__dirname, 'static', 'blog', 'index.json'), (err, json) => {
+    if(err){ return res.sendStatus(500) };
 
-app.get('/blog/postList', (req, res) => {
-  fs.readFile(path.join(__dirname, 'data', 'blog', 'index.json'), 'utf-8', (err, json) => {
-    if(err){
-      return console.log(err);
-    }
+    let files = JSON.parse(json);
 
-    let index = JSON.parse(json);
+    // Get the arguments on the request
+    let count = req.query.count || -1;
+    let start = req.query.start || -1;
 
-    Promise.all(index.map((post) => {
-      return new Promise(function(resolve, reject) {
-        fs.readFile(path.join(__dirname, 'data', 'blog', 'posts', `${post.id}.json`), 'utf-8', (err, json) => {
-          if(err){
-            return reject(err);
-          }
-          resolve(JSON.parse(json));
-        })
-      });
-    }))
-    .then((posts) => {
-      res.json(posts.map((post, i) => {
-        return {
-          description: post.description,
-          id: index[i].id,
-        };
-      }));
-    })
-    .catch((err) => {
-      if(err){
-        return console.log(err);
-      }
+    // Turn the object into an array of posts before the target time
+    let posts = (start !== -1)? Object.keys(files) : Object.keys(files).filter((key) => {
+      return files[key] > start;
     });
-  });
-});
-
-app.get('/blog/new', (req, res) => {
-  let count = req.query.count || 3;
-  fs.readFile(path.join(__dirname, 'data', 'blog', 'index.json'), 'utf-8', (err, json) => {
-    if(err){
-      return console.log(err);
+    // If we have a count limit then limit the count of the sorted array
+    if(count !== -1){
+      posts = posts.sort((a, b) => {
+        return files[a] > files[b];
+      }).splice(0, count);
     }
 
-    let posts = JSON.parse(json);
-    let start = req.query.start || posts.length;
-    count = (count > start)? start : count;
-
-    Promise.all(posts
-    .slice(start - count, count)
-    .map((post) => {
-      return new Promise(function(resolve, reject) {
-        fs.readFile(path.join(__dirname, 'data', 'blog', 'posts', `${post.id}.json`), 'utf-8', (err, json) => {
-          if(err){
-            return reject(err);
-          }
-          resolve(JSON.parse(json));
-        })
-      });
-    }))
-    .then((posts) => {
-      res.json({
-        end: start - count,
-        posts
-      });
-    })
+    res.json(posts.map((post) => {
+      return { post, time: files[post] };
+    }));
   });
 });
 
+// TODO: log ip addresses
 app.post('/contact', (req, res) => {
   fs.writeFile(path.join(__dirname, 'data', 'contact', `${Date.now().toString()}.json`), JSON.stringify(req.body), 'utf-8', (err) => {
     if(err){

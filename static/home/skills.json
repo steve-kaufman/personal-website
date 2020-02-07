@@ -1,0 +1,82 @@
+[
+  {
+    "skill": "javascript",
+    "start": 1265113445700
+  },
+  {
+    "skill": "html",
+    "start": 1265113445700
+  },
+  {
+    "skill": "css",
+    "start": 1265113445700
+  },
+  {
+    "skill": "node.js",
+    "start": 1422901672700
+  },
+  {
+    "skill": "React JS",
+    "start": 1549132082200
+  },
+  {
+    "skill": "React Native",
+    "start": 1564910895100
+  },
+  {
+    "skill": "Git",
+    "start": 1359786518000
+  },
+  {
+    "skill": "Java",
+    "start": 1328228924900
+  },
+  {
+    "skill": "Andoird",
+    "start": 1454459341100
+  },
+  {
+    "skill": "REST",
+    "start": 1486016949300
+  },
+  {
+    "skill": "XML",
+    "start": 1486016949300
+  },
+  {
+    "skill": "c++",
+    "start": 1359786564100
+  },
+  {
+    "skill": "c#",
+    "start": 1454459371700
+  },
+  {
+    "skill": "Python",
+    "start": 1359786518000
+  },
+  {
+    "skill": "Batch",
+    "start": 1517574588500
+  },
+  {
+    "skill": "MongoDB",
+    "start": 1549132196300
+  },
+  {
+    "skill": "YAML",
+    "start": 1564910895100
+  },
+  {
+    "skill": "Docker",
+    "start": 1564910895100
+  },
+  {
+    "skill": "Excel",
+    "start": 1391344202400
+  },
+  {
+    "skill": "Unix base Operating Systems",
+    "start": 1391344202400
+  }
+]

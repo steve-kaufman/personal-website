@@ -20,7 +20,7 @@ class Home extends Component {
       blogEnd: undefined
     };
 
-    fetch('/projects')
+    fetch('/home/projects')
     .then((res) => {
       return res.json();
     })
@@ -29,8 +29,7 @@ class Home extends Component {
         projects: json
       });
     });
-
-    fetch('/skills')
+    fetch('/home/skills')
     .then((res) => {
       return res.json();
     })
@@ -40,17 +39,32 @@ class Home extends Component {
       });
     });
 
-    fetch('/blog/new')
+    fetch('/blog/list?count=3')
     .then((res) => {
       return res.json();
     })
-    .then((json) => {
-      this.setState({
-        blog: json.posts,
-        blogEnd: json.end
-      });
+    .then((list) => {
+      return Promise.all(list.map((post) => {
+        return new Promise(function(resolve, reject) {
+          fetch(`/blog/post?post=${post.post}`)
+          .then((res) => {
+            return res.json();
+          })
+          .then(resolve)
+          .catch(reject)
+        });
+      }))
+      .then((posts) => {
+        this.setState({
+          blog: posts,
+          blogEnd: Math.min(list.map((post) => {
+            return post.time;
+          }))
+        });
+      })
     });
   }
+
   render(){
     return <div>
       <div className='Intro'>

@@ -14,13 +14,29 @@ class Blog extends Component {
       postList: [],
     };
 
-    fetch('/blog/postList')
+    fetch('/blog/list')
     .then((res) => {
       return res.json();
     })
-    .then((json) => {
-      this.setState({
-        postList: json
+    .then((list) => {
+      Promise.all(list.map((post) => {
+        return new Promise(function(resolve, reject) {
+          fetch(`/blog/post?post=${post.post}`)
+          .then((res) => {
+            return res.json();
+          })
+          .then((data) => {
+            resolve({ id: post.post, ...data });
+          })
+          .catch(reject)
+        });
+      }))
+      .then((posts) => {
+        this.setState({
+          postList: posts.map((post) => {
+            return { id: post.id, description: post.description };
+          })
+        })
       })
     });
   }

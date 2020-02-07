@@ -12,15 +12,30 @@ class NewPosts extends Component {
       blogEnd: undefined,
     };
 
-    fetch('/blog/new')
+
+    fetch('/blog/list?count=3')
     .then((res) => {
       return res.json();
     })
-    .then((json) => {
-      this.setState({
-        posts: json.posts,
-        end: json.end
-      });
+    .then((list) => {
+      return Promise.all(list.map((post) => {
+        return new Promise(function(resolve, reject) {
+          fetch(`/blog/post?post=${post.post}`)
+          .then((res) => {
+            return res.json();
+          })
+          .then(resolve)
+          .catch(reject)
+        });
+      }))
+      .then((posts) => {
+        this.setState({
+          posts,
+          blogEnd: Math.min(list.map((post) => {
+            return post.time;
+          }))
+        });
+      })
     });
   }
 
