@@ -1,34 +1,63 @@
 [
   {
     "name": "personal webiste",
+    "link": "https://github.com/jbec1901/personal-website",
     "tags": ["html", "js", "css", "react", "node.js", "express"],
-    "description": "This project is the website that you are looking at."
+    "description": "This project is the website that you are looking at. It was built with nodejs and express on the backend and runs a single page react app on the frount end."
   },
   {
     "name": "TiltifyV3.0API",
     "link": "https://github.com/jbec1901/TiltifyV3.0API",
-    "tags": ["node.js", "js", "api"]
+    "tags": ["node.js", "js", "api", "npm"],
+    "description": "Tiltify is a charity livesteaming aplication which connects your twich steam and a dontation location/feed. I built an SDK that can be used with tiltify to easly make API requets, and check for new donation."
   },
   {
     "name": "tiltify-stream-tools",
-    "tags": ["html", "js", "css", "react", "node.js", "express", "api"]
+    "tags": ["html", "js", "css", "react", "node.js", "express", "api"],
+    "description": "tiltify-stream-tools is a application which implemnts TiltifyV3.0API to be used by non programmers. It hosts a server which create a react page that can be used to manage differnt settings. It also interfaces with OBS (Open Brodcasting Software) to automaticly play donation sounds and update a total on the livestream interface."
   },
   {
     "name": "TiltifyV3.0API_DevKit",
-    "tags": ["node.js", "js", "api", "html", "css", "react", "express"]
+    "link": "https://github.com/jbec1901/TiltifyV3.0API_DevKit",
+    "tags": ["node.js", "js", "api", "html", "css", "react", "express"],
+    "description": "TiltifyV3.0API_DevKit is an implemntation of tiltifys API that can be hosted localy for testing actions happening on steam such as a donation without having to set up a campaign and donate to it for ever test."
   },
   {
     "name": "JS-Game-Engine",
-    "tags": ["node.js", "js", "electron"]
+    "link": "https://github.com/jbec1901/JS-Game-Engine",
+    "tags": ["node.js", "js", "electron"],
+    "description": "JS-Game-Engine is a game engin that was built using javascript in combination with electron."
   },
   {
     "name": "mobileLinkBot",
+    "link": "https://github.com/jbec1901/mobileLinkBot",
     "status": "archived",
-    "tags": ["python", "api"]
+    "tags": ["python", "api"],
+    "description": "mobileLinkBot was a project that solved a long standing bug on the offical reddit app where any comment thread that was longer then 10 comments would not even show that their where more posts. It solved this problem by creating a direct link to the 10th comment on the 9th comment. About a month after this project came out the bug was solved so the project is now archived."
   },
   {
     "name": "PythonNeuralNet",
+    "link": "https://github.com/jbec1901/PythonNeuralNet",
     "status": "archived",
-    "tags": ["python", "numpy"]
+    "tags": ["python", "numpy"],
+    "description": "PythonNeuralNet is an implemntation of deep learning in python."
+  },
+  {
+    "name": "poly-publish-python",
+    "link": "https://github.com/jbec1901/poly-publish-python",
+    "tags": ["python", "pip"],
+    "description": "poly-publish is a project that takes a pubished projects name and also publishes the project to every name that is similar."
+  },
+  {
+    "name": "mini-image-server",
+    "link": "https://github.com/jbec1901/mini-image-server",
+    "tags": ["node.js", "js", "api", "express", "npm"],
+    "description": "mini-image-server is a project that takes images hosted on a server and scales them down in regular intervale and makes all of the images availble so that the lower quality images can be loaded first then replace with the higher quality images after they have been sent over the network."
+  },
+  {
+    "name": "mini-image-react",
+    "link": "https://github.com/jbec1901/mini-image-server",
+    "tags": ["js", "api", "react", "npm"],
+    "description": "mini-image-react is a project that takes images hosted by mini-image-server in order of resolution and loads them as they arive."
   }
 ]
