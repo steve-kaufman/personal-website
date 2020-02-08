@@ -3,7 +3,6 @@
   background-color: #ddd;
   padding-top: 50px;
   width: 100%;
-  height: 80.7vh;
 }
 
 .Contact .Header {
@@ -27,29 +26,19 @@
 }
 
 .Form {
-  float: left;
+  display: flex;
+  flex-direction: column;
   width: 50%;
 }
 
-.Form>* {
+.Form > div {
   margin: 15px;
-}
-
-input.Name {
-  width: 97%;
-}
-
-textarea.Message {
-  display: block;
   width: 100%;
-  height: 100px;
-
-  cursor: text;
-  resize: none;
 }
 
-input.Email {
-  width: 97%;
+.Form .Section {
+  background-color: transparent;
+  width: 100%;
 }
 
 .Error {
@@ -57,7 +46,6 @@ input.Email {
 }
 
 .Info {
-  float: left;
   width: 50%;
   text-align: center;
   margin-top: 25px;
