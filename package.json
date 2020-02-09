@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js"
+    "dev": "concurrently \"nodemon server.js\" \"cd react-ui && npm start\""
   },
   "author": "Leyla Becker",
   "license": "ISC",
@@ -15,6 +15,7 @@
     "mini-image-server": "^1.0.2"
   },
   "devDependencies": {
+    "concurrently": "^5.1.0",
     "nodemon": "^2.0.2"
   }
 }
