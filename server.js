@@ -20,7 +20,7 @@ const mini = require('mini-image-server');
 app.use(mini(path.join(__dirname, 'static', 'img', 'min')));
 // body-parser
 app.use(express.urlencoded({
-  extended: true
+  extended: true,
 }));
 app.use(express.json({limit: '500mb'}));
 // express-session
@@ -41,7 +41,7 @@ app.use(express.static(path.join(__dirname, 'react-ui', 'build')));
 // Start the server
 const http = require('http');
 const ports = {
-  http: process.env.PORT || 3002
+  http: process.env.PORT || 3002,
 }
 const httpServer = http.createServer(app);
 httpServer.listen(ports.http, () => {
