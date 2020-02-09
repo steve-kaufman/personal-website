@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "concurrently \"nodemon server.js\" \"cd react-ui && npm start\"",
+    "dev-server": "concurrently \"nodemon server.js\" \"\"",
     "build": "cd react-ui && npm run build"
   },
   "author": "Leyla Becker",
