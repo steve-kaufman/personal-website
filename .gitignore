@@ -19,5 +19,7 @@ yarn-error.log*
 
 # We don't want send the min images
 /static/img/min/min
+# Stuff gets built on server
+/react-ui/build
 # We don't want to send the test database
 /data
