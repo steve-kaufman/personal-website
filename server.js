@@ -22,16 +22,6 @@ app.use(express.urlencoded({
   extended: true,
 }));
 app.use(express.json({limit: '500mb'}));
-// express-session
-//app.use(session({
-//  secret: fs.readFileSync(path.join(__dirname, 'auth.json'), 'utf-8'),
-//  resave: false,
-//  saveUninitialized: true,
-//  cookie: {
-//    maxAge: 60000,
-//    secure: 'auto',
-//  },
-//}));
 
 // Static routes for files
 app.use(express.static(path.join(__dirname, 'static')));
@@ -52,21 +42,13 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'react-ui', 'build', 'index.html'));
 });
 
-// API routes for authentication
-// app.get('/auth/login', (req, res) => {
-//   res.json('false');
-// });
-// app.get('/auth/create', (req, res) => {
-//   res.json('false');
-// });
-
-// Start up mongodb
+// Set up mongodb
 const mongodb = require('mongodb');
 const mongo = {
   uri: process.env.MONGODB_URI || 'mongodb://localhost:27017',
   db: process.env.DATABASE || 'website',
 };
-
+// Connect to mongodb server
 mongodb.MongoClient.connect(mongo.uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
