@@ -1,6 +1,5 @@
 // Things for managing the file system
 const path = require('path');
-const fs = require('fs');
 
 // Starting Server's
 // Page Routing
