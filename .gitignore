@@ -17,4 +17,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# We don't want send the min images
 /static/img/min/min
+# We don't want to send the test database
+/data

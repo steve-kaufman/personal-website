@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "concurrently \"nodemon server.js\" \"cd react-ui && npm start\"",
-    "dev-server": "concurrently \"nodemon server.js\" \"\"",
+    "pretest": "mongod --dbpath=data & ",
+    "test": "concurrently \"nodemon server.js\" \"cd react-ui && npm start\"",
+    "posttest": "kill %1",
     "build": "cd react-ui && npm run build"
   },
   "author": "Leyla Becker",
@@ -14,7 +15,8 @@
   "dependencies": {
     "express": "^4.17.1",
     "express-session": "^1.17.0",
-    "mini-image-server": "^1.0.2"
+    "mini-image-server": "^1.0.2",
+    "mongodb": "^3.5.2"
   },
   "devDependencies": {
     "concurrently": "^5.1.0",

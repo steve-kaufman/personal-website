@@ -54,72 +54,91 @@ app.get('/', (req, res) => {
 });
 
 // API routes for authentication
-app.get('/auth/login', (req, res) => {
-  res.json('false');
-});
-app.get('/auth/create', (req, res) => {
-  res.json('false');
-});
+// app.get('/auth/login', (req, res) => {
+//   res.json('false');
+// });
+// app.get('/auth/create', (req, res) => {
+//   res.json('false');
+// });
 
-// API routes for the home page
-app.get('/home/projects', (req, res) => {
-  fs.readFile(path.join(__dirname, 'static', 'home', 'projects.json'), 'utf-8', (err, json) => {
-    if(err){ return res.sendStatus(500) };
-    res.send(json)
-  });
-});
-app.get('/home/skills', (req, res) => {
-  fs.readFile(path.join(__dirname, 'static', 'home', 'skills.json'), 'utf-8', (err, json) => {
-    if(err){ return res.sendStatus(500) };
-    res.send(json)
-  });
-});
+// Start up mongodb
+const mongodb = require('mongodb');
+const mongo = {
+  uri: process.env.DATABASE || 'mongodb://localhost:27017',
+  db: 'website',
+};
 
-// API routes for blog things
-app.get('/blog/post', (req, res) => {
-  fs.readFile(path.join(__dirname, 'static', 'blog', 'posts', `${req.query.post}.json`), 'utf-8', (err, json) => {
-    if(err){ return res.sendStatus(500) };
-    res.send(json)
-  });
-});
-app.get('/blog/list', (req, res) => {
-  // Get a list of all of the posts
-  fs.readFile(path.join(__dirname, 'static', 'blog', 'index.json'), (err, json) => {
-    if(err){ return res.sendStatus(500) };
+mongodb.MongoClient.connect(mongo.uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then((client) => {
+  let db = client.db(mongo.db);
 
-    let files = JSON.parse(json);
-
-    // Get the arguments on the request
-    let count = req.query.count || -1;
-    let start = req.query.start || -1;
-
-    // Turn the object into an array of posts before the target time
-    let posts = (start !== -1)? Object.keys(files) : Object.keys(files).filter((key) => {
-      return files[key] > start;
+  // API routes for the home page
+  app.get('/home/projects', (req, res) => {
+    db.collection('projects').find({}).toArray((err, projects) => {
+      if(err){ return res.sendStatus(500) };
+      res.send(projects);
     });
-    // If we have a count limit then limit the count of the sorted array
-    if(count !== -1){
-      posts = posts.sort((a, b) => {
-        return files[a] > files[b];
-      }).splice(0, count);
-    }
-
-    res.json(posts.map((post) => {
-      return { post, time: files[post] };
-    }));
   });
-});
+  app.get('/home/skills', (req, res) => {
+    db.collection('skills').find({}).toArray((err, skills) => {
+      if(err){ return res.sendStatus(500) };
+      res.send(skills);
+    });
+  });
 
-// TODO: log ip addresses
-app.post('/contact', (req, res) => {
-  fs.writeFile(path.join(__dirname, 'data', 'contact', `${Date.now().toString()}.json`), JSON.stringify(req.body), 'utf-8', (err) => {
-    if(err){
-      return console.log(err);
-    }
-  })
-});
+  // API routes for blog things
+  app.get('/blog/post', (req, res) => {
+    db.collection('posts').findOne({
+      _id: new mongodb.ObjectId(req.query.post)
+    }, (err, post) => {
+      if(err){ return res.sendStatus(500) };
+      res.send(post);
+    });
+  });
+  app.get('/blog/list', (req, res) => {
+    db.collection('posts').find({}).toArray((err, posts) => {
+      // Get the arguments on the request
+      let count = req.query.count || -1;
+      let start = req.query.start || -1;
 
-// redirect any request that don't go anywhere to the home page
-app.get('*', (req, res) => {
-  res.redirect('/');
+      if(start !== -1){
+        posts = posts.filter((post) => {
+          return post.date > start;
+        });
+      }
+      if(count !== -1){
+        posts = posts.sort((a, b) => {
+          return a.date > b.date;
+        }).splice(0, count);
+      }
+
+      res.json(posts.map((post) => {
+        return {
+          post: post._id,
+          date: post.date,
+        };
+      }))
+    });
+  });
+
+  // TODO: log ip addresses
+  app.post('/contact', (req, res) => {
+    db.collection('contact').insert({
+      date: Date.now(),
+      id: req.ip,
+      ...req.body
+    });
+    req.send();
+  });
+
+  // redirect any request that don't go anywhere to the home page
+  app.get('*', (req, res) => {
+    res.redirect('/');
+  });
+})
+.catch((err) => {
+  throw err;
 });
