@@ -64,8 +64,8 @@ app.get('/', (req, res) => {
 // Start up mongodb
 const mongodb = require('mongodb');
 const mongo = {
-  uri: process.env.DATABASE || 'mongodb://localhost:27017',
-  db: 'website',
+  uri: process.env.MONGODB_URI || 'mongodb://localhost:27017',
+  db: process.env.DATABASE || 'website',
 };
 
 mongodb.MongoClient.connect(mongo.uri, {
