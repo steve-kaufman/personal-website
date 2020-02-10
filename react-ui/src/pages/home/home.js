@@ -91,12 +91,12 @@ class Home extends Component {
               borderRadius: '50%',
               border: '1em solid #555',
             }} src='photo.png' alt=''/>
-            <div style={{
+            <h1 style={{
               color: '#fff',
               textAlign: 'center',
               fontSize: '30pt',
               textShadow: '-0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black',
-            }}>Welcome</div>
+            }}>Welcome</h1>
           </div>
         </div>
       </div>
