@@ -15,6 +15,8 @@ if(app.get('env') === 'production'){
 const mini = require('mini-image-server');
 // const session = require('express-session');
 
+// g-zip
+app.use(express.compress());
 // mini-image-server
 app.use(mini(path.join(__dirname, 'static', 'img', 'min')));
 // body-parser
