@@ -13,10 +13,18 @@ if(app.get('env') === 'production'){
 
 // All the middleware
 const mini = require('mini-image-server');
+const compression = require('compression')
 // const session = require('express-session');
 
 // g-zip
-app.use(express.compress());
+app.use(compression({ filter: (req, res) => {
+  if (req.headers['x-no-compression']) {
+    // don't compress responses with this request header
+    return false;
+  }
+  // fallback to standard filter function
+  return compression.filter(req, res);
+}}))
 // mini-image-server
 app.use(mini(path.join(__dirname, 'static', 'img', 'min')));
 // body-parser
