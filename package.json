@@ -4,9 +4,7 @@
   "scripts": {
     "preinstall": "cd react-ui && npm i",
     "build": "cd react-ui && npm run build",
-
     "start": "node server.js",
-
     "pretest": "mongod --dbpath=data & ",
     "test": "concurrently \"nodemon server.js\" \"cd react-ui && npm start\"",
     "posttest": "kill %1"
