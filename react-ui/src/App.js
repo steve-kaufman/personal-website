@@ -18,13 +18,11 @@ class AppWrapper extends Component {
           <Link className='Nav' to='/contact'>Contact</Link>
         </span>
       </div>
-      <div className='Page'>
-        <Switch>
-          <Route exact path='/contact' component={ContactPage}/>
-          <Route path='/blog' component={BlogPage}/>
-          <Route path='/' component={HomePage}/>
-        </Switch>
-      </div>
+      <Switch>
+        <Route exact path='/contact' component={ContactPage}/>
+        <Route path='/blog' component={BlogPage}/>
+        <Route path='/' component={HomePage}/>
+      </Switch>
       <div className='Footer'>
         <div>
           <a href='mailto:jbec1901@pm.me'>jbec1901@pm.me</a>

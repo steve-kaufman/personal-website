@@ -66,37 +66,15 @@ class Home extends Component {
   }
 
   render(){
-    return <div>
-      <div style={{
-        height: '650px',
-        display: 'flex',
-        overflow: 'hidden',
-      }}>
-        <div style={{
-          position: 'relative',
-          width: '100%',
-        }}>
-          <Image style={{
-            position: 'absolute',
-            width: '100%',
-          }} src='intro.png' alt=''/>
-          <div style={{
-            position: 'absolute',
-            width: '100%',
-            top: '25%',
-          }}>
-            <Image style={{
-              marginLeft: 'calc(42.5% - 15px)',
-              width: '15%',
-              borderRadius: '50%',
-              border: '1em solid #555',
-            }} src='photo.png' alt=''/>
-            <h1 style={{
-              color: '#fff',
-              textAlign: 'center',
-              fontSize: '30pt',
-              textShadow: '-0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black',
-            }}>Welcome</h1>
+    return <div className='Body'>
+      <div className='Header_Section'>
+        <div className='Container'>
+          <Image className='Background_Image' src='intro.png' alt=''/>
+          <div className='Header_Body'>
+            <div className='Center Photo_Border'>
+              <Image className='Photo' src='photo.png' alt=''/>
+            </div>
+            <h1 className='Header_Text'>Welcome</h1>
           </div>
         </div>
       </div>
