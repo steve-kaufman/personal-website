@@ -71,7 +71,7 @@ class Home extends Component {
         <div className='Container'>
           <Image className='Background_Image' src='intro.png' alt=''/>
           <div className='Header_Body'>
-            <div className='Center Photo_Border'>
+            <div className='Photo_Border'>
               <Image className='Photo' src='photo.png' alt=''/>
             </div>
             <h1 className='Header_Text'>Welcome</h1>
