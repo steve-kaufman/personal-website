@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
+
+import Tag from './../../components/orginize/tag';
 
 import './project.css';
-import Taggable from './../tag/taggable';
 
-class Project extends Taggable {
+class Project extends Component {
   render(){
     return <div className='Project'>
       {(this.props.link === undefined)?
@@ -21,9 +22,15 @@ class Project extends Taggable {
       <div className='description'>
         {this.props.description}
       </div>
-      {
-        super.render()
-      }
+      <div className='Tags'>
+        {
+          this.props.tags.map((tag, i) => {
+            return <Tag key={i} selected={ this.props.selection.indexOf(tag) !== -1 } update={ () => {
+              this.props.click(tag)
+            } } tag={tag}/>;
+          })
+        }
+      </div>
     </div>;
   }
 }

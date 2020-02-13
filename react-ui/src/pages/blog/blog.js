@@ -7,12 +7,12 @@ import Post from './post';
 
 import './blog.css';
 
-function get(route){
-  return fetch(route)
-  .then((res) => {
-    return res.json();
-  });
-}
+// function get(route){
+//   return fetch(route)
+//   .then((res) => {
+//     return res.json();
+//   });
+// }
 
 class Blog extends Component {
 

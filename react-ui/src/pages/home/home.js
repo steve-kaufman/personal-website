@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 
 import './home.css';
 
-import TagSelector from './../../components/tag/tagSelector'
-
-import Project from './../../components/project/project';
+import TagSelector from './../../components/tag/tagSelector';
+import Projects from './projects';
 
 import Image from 'mini-image-react';
 
@@ -13,21 +12,11 @@ class Home extends Component {
     super(props);
 
     this.state = {
-      projects: undefined,
       skills: undefined,
       blog: undefined,
       blogEnd: undefined
     };
 
-    fetch('/home/projects')
-    .then((res) => {
-      return res.json();
-    })
-    .then((json) => {
-      this.setState({
-        projects: json
-      });
-    });
     fetch('/home/skills')
     .then((res) => {
       return res.json();
@@ -79,14 +68,7 @@ class Home extends Component {
       </div>
       <div className='Section'>
         <div className='Header'> Portfolio </div>
-        <TagSelector>
-          {
-            (this.state.projects === undefined)? <div>fetching projects</div>:
-            this.state.projects.map((project, i) => {
-              return <Project key={i} {...project}/>;
-            })
-          }
-        </TagSelector>
+        <Projects/>
       </div>
       <div className='Section'>
         <div className='Header'> Skills </div>
