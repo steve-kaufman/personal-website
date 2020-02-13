@@ -1,0 +1,32 @@
+.Preview {
+  background-color: #fff;
+  border: solid 1px #888;
+  border-radius: 10px;
+  margin: 15px;
+  box-shadow: 10px 10px 5px #eee;
+  width: 100%;
+}
+
+.Post_Body {
+  color: #333;
+  text-decoration: none;
+}
+
+.Preview > div {
+  margin: 15px;
+}
+
+.Top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Title {
+  font-weight: bold;
+  font-size: 18pt;
+}
+
+.Preview_Photo {
+  width: 100%;
+}

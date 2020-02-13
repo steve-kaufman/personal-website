@@ -1,0 +1,12 @@
+
+.Flex_Base {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.Sub_Flex {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}

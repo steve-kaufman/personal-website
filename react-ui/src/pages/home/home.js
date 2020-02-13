@@ -5,7 +5,6 @@ import './home.css';
 import TagSelector from './../../components/tag/tagSelector'
 
 import Project from './../../components/project/project';
-import BlogPost from './../../components/blog/blogPost';
 
 import Image from 'mini-image-react';
 
@@ -99,40 +98,6 @@ class Home extends Component {
             })
           }
         </div>
-      </div>
-      <div className='Section'>
-        <div className='Header'> Blog </div>
-        <TagSelector>
-          {
-            (this.state.blog === undefined)? <div>fetching blog posts</div>:
-            this.state.blog.map((post, i) => {
-              return <BlogPost key={i} {...post}/>;
-            })
-          }
-        </TagSelector>
-        <button style={{
-          float: 'right',
-          margin: '0px 10px 10px 0px',
-          background: 'transparent',
-          padding: '7.5px',
-          color: '#666',
-          border: '2px solid #666',
-          borderRadius: '2px',
-          fontWeight: 'bold',
-          cursor: 'pointer',
-        }} onClick={() => {
-
-          fetch(`/blog/new?count=5&start=${this.state.blogEnd}`)
-          .then((res) => {
-            return res.json();
-          })
-          .then((json) => {
-            this.setState({
-              blog: [ ...this.state.blog, ...json.posts ],
-              blogEnd: json.end
-            });
-          });
-        }}>More Posts</button>
       </div>
     </div>;
   }

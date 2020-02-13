@@ -1,0 +1,20 @@
+
+.Tag {
+  display: inline-block;
+  padding: 5px;
+  margin: 5px 5px 5px 5px;
+  font-size: 10pt;
+  border: solid 1px #ccc;
+  border-radius: 4px;
+  color: #666;
+  cursor: pointer;
+}
+
+.Selected {
+  background-color: #ccc;
+}
+
+.Tag:hover {
+  box-shadow: 2.5px 2.5px 5px #eee;
+  background-color: #ddd;
+}

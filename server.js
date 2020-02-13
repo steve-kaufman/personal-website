@@ -55,8 +55,8 @@ app.get('/', (req, res) => {
 // Set up mongodb
 const mongodb = require('mongodb');
 const mongo = {
-  uri: process.env.MONGODB_URI || 'mongodb://localhost:27017',
-  db: process.env.DATABASE || 'website',
+  uri: process.env.MONGODB_URI || 'mongodb://user:yMAqF4g6BoMz47V553j7se$c8kJz%6Hq$b#4rvb2SN6u&VWc&Ew75L393ScUG3HhNjh&WGm@ds147746.mlab.com:47746/heroku_5lldlb8l',
+  db: process.env.DATABASE || 'heroku_5lldlb8l',
 };
 // Connect to mongodb server
 mongodb.MongoClient.connect(mongo.uri, {

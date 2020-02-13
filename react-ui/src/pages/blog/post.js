@@ -1,41 +1,46 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
-import BlogPost from './../../components/blog/blogPost';
+import ReactMarkdown from 'react-markdown';
+
+import './post.css';
 
 class Post extends Component {
-
-  static getDerivedStateFromProps(props, state){
-    fetch(`/blog/post?post=${props.location.pathname.split('/')[2]}`)
-    .then((res) => {
-      return res.json();
-    })
-    .then((json) => {
-      let newState = { loading: false, ...json };
-      // FIX: This is hacky and should be fixed
-      state.self.setState(newState);
-    })
-
-    return null;
-  }
 
   constructor(props){
     super(props);
 
     this.state = {
       loading: true,
-      self: this
     };
+
+    fetch(`/blog/post?post=${props.location.pathname.split('/')[2]}`)
+    .then((res) => {
+      return res.json();
+    })
+    .then((json) => {
+      this.setState({
+        loading: false,
+        ...json,
+      });
+    })
   }
 
   render(){
-    return <div style={{
-      width: '95%',
-    }}>
+    console.log(this.state);
+    return <Fragment>
       {
         (this.state.loading)? 'Page Loading Please Wait' :
-        <BlogPost { ...this.state }/>
+        <div className='Post'>
+          <div>
+            <div className='Top'>
+              <div className='Title'>{ this.state.title }</div>
+              <div className='Date'>{ this.state.date }</div>
+            </div>
+            <ReactMarkdown source={ this.state.contents } />
+          </div>
+        </div>
       }
-    </div>
+    </Fragment>
   }
 }
 
